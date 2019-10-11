@@ -34,7 +34,7 @@ routes.post('/categorias/nova', (req, res) => {
     }
 
     //Ja foi recebiso agora falta 'Salvar' a tal categoria
-    new Categoria(novaCategoria).save().then(() =>{
+    new Categoria(novaCategoria).save().then(() => {
         console.log('Categorva salva com sucesso!!')
     }).catch((err) =>{
         console.log('Erro ao salvar a categoria!!')

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Categoria = new Schema({
@@ -6,14 +6,14 @@ const Categoria = new Schema({
         type: String,
         required: true
     },
-    Slug:{
+    slug:{ //Dava erro pq slug tinha letra iniciais maiuscula "S"
         type: String,
         required: true
     },
-    date:{
+    date: {
         type: Date,
         default: Date.now()
     }
 })
 
-mongoose.model('categoria', Categoria)
+mongoose.model('categoria', Categoria);

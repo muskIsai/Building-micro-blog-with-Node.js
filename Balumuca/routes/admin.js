@@ -4,7 +4,7 @@ const express = require('express')
 const routes = express.Router()
 const mongoose = require('mongoose')
 require('../models/categoria') //Carregar o mudulo da pasta q cootem ficheiro (categoria.js) responsavel pela BD MONGO
-const Categoria = mongoose.model('categoria')/*vai passar referencia da 'categoria' p/ varcategoria'avel Categoria. 'categoria'
+const Categoria = mongoose.model('categoria')/*vai passar referencia da 'categoria' p/ carcategoria'avel Categoria. 'categoria'
  veio da ficheiro categoria.js na dentro da pasta model*/
 
 
@@ -35,7 +35,7 @@ routes.post('/categorias/nova', (req, res) => {
 
     //Ja foi recebiso agora falta 'Salvar' a tal categoria
     new Categoria(novaCategoria).save().then(() => {
-        console.log('Categorva salva com sucesso!!')
+        console.log('Categoria salva com sucesso!!')
     }).catch((err) =>{
         console.log('Erro ao salvar a categoria!!')
     })

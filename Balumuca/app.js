@@ -24,9 +24,9 @@ app.set('view engine', 'hbs')
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/balumuca_db', {
     useMongoClient: true
-}).then(() => {
+}).then(()=>{
     console.log('MongoDB conectado!');
-}).catch((err) => {
+}).catch((err)=>{
     console.log('Erro ao conectar a MongoDB' + err);
 });
 

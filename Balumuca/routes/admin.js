@@ -36,7 +36,7 @@ routes.post('/categorias/nova', (req, res) => {
 /* Campo do "nome" */
 var erros = []// array vazio
 //N pemitir enviar formulario vazio
-if(req.body.nome || typeof req.body.nome == undefined || req.body.nome == null)
+if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null)
 {
 //Se o campo nome for vazio ou tipo do campo nome for igual a indefenido ou se o nome for nulo, ele vai exibir msg de erro
     erros.push({texto: 'Nome invalido!!'}); //Fcao push() serve p/ colocar novo dados num array.
@@ -44,7 +44,7 @@ if(req.body.nome || typeof req.body.nome == undefined || req.body.nome == null)
 }
 
 /* Campo do "slug" */
-if(req.body.slug || typeof req.body.slug == undefined || req.body.slug == null)
+if(!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null)
 {
     erros.push({texto: 'Slug invalido!'});
 }
@@ -62,18 +62,23 @@ if(erros.length > 0)
     //Se o array "erros" tiver erro, vamos reinderizar p/ view na pagina addCategorias.hbs
     res.render('admin/addcategorias', {erros: erros}) //sera add o texto "erros" na  pagina addCategorias.hbs q xta dentro da view
 }//#Final da Validacao
-
+else{
     const novaCategoria = { //novaCategoria = objecto q recebe e guarda os valores vindo do formulario (nome e slug)
         nome: req.body.nome, //.nome = refere o elemento q xta nos campo do formulario <input ... name='nome' ...>
         slug: req.body.slug  // <input ... name='slug' ...>
     }
 
-    //Ja foi recebiso agora falta 'Salvar' a tal categoria
+    //Ja foi recebido agora falta 'Salvar' a tal categoria
     new Categoria(novaCategoria).save().then(() => {
-        console.log('Categoria salva com sucesso!!')
-    }).catch((err) =>{
-        console.log('Erro ao salvar a categoria!!')
+        //console.log('Categoria salva com sucesso!!')
+        req.flash('success_msg', 'Categoria criada com sucesso!!')
+        res.redirect('/admin/categorias') //Assim q salvar uma categoria, sera redirecionado p/ a pagina d categorias
+    }).catch((err) => {
+        req.flash('error_msg', 'Erro ao salvar a categoria. Tente novamente!!')
+        //console.log('Erro ao salvar a categoria!!')
+        res.redirect('/admin')
     })
+}  
 })//#Final da  rota post
 
 module.exports = routes; //Exportar 'routes' p/ o 'app.js'

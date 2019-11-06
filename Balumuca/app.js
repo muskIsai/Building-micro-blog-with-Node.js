@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const admin = require('./routes/admin')//buscar grupo d arquivo pra usar aqui. Abaixo vai definir apenas as tais rotas
 const path = require('path') //pra manipular as pastas
 const  expressHbs = require('express-handlebars')
-const session = require(express-session)
-const flash = require(connect-flash)
+const session = require('express-session')
+const flash = require('connect-flash')
 const mongoose = require('mongoose')
 
 const app = express()
@@ -25,7 +25,7 @@ app.use(flash()) //O flash tem q xtar sempre abaixo do "session"
 app.use((req, res, next) =>{
     //vamos criar 2 variaveis globais q podem ser acessados em qlqr parte desta pagina (app.js). Eis as variaveis criadas:
     //sucess_msm, error_msg. Sao ceriadas atraves da propriedade "locals"
-    res.locals.sucess_msg = req.flash('sucess_msg')
+    res.locals.sucess_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')
     next() //Vai permitir entrar ou passar (vai avancar)
 })

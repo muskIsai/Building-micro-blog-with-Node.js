@@ -13,18 +13,26 @@ routes.get('/', (req, res)=> {
     res.render('admin/index')
 })
 
+//Posts
 routes.get('/posts', (req, res) => {
-    res.render('admin/posts')
-})
+        res.render('admin/posts')
+    }) 
 
+
+//Categorias
+//Exibir todas categorias cadastradas. Serão mostrado na página "categorias"
 routes.get('/categorias', (req, res) => {
-    res.render('admin/categorias')
+    Categoria.find().sort({date: 'desc'}).then((categorias) => { //sort({date: 'desc'} = permite exibir conteúdo  na ordem descrente d acordo com a data, mostrando posts bem mais recente
+        res.render('admin/categorias', {categorias: categorias})
+    }).catch((err) => {
+        req.flash('error_msgs', 'Erro so listar as categorias na página')
+        res.redirect('/admin')
 })
 
 routes.get('/categorias/add', (req, res) => {
     res.render('admin/addcategorias')
+    })
 })
-
 
         
 

@@ -25,7 +25,7 @@ app.use(flash()) //O flash tem q xtar sempre abaixo do "session"
 app.use((req, res, next) =>{
     //vamos criar 2 variaveis globais q podem ser acessados em qlqr parte desta pagina (app.js). Eis as variaveis criadas:
     //sucess_msm, error_msg. Sao ceriadas atraves da propriedade "locals"
-    res.locals.sucess_msg = req.flash('success_msg')
+    res.locals.success_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')
     next() //Vai permitir entrar ou passar (vai avancar)
 })

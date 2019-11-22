@@ -34,7 +34,7 @@ routes.get('/categorias/add', (req, res) => {
     })
 })
 
-        
+            /* Rota de ADD */
 
 /*rota (abaxo) responsavel por cadastrar usuario o BD mongo. Ela va//rota responsavel por cadastrar usuario o BD mongo. Elareceber os dados
 do formulario (atraves d body-parser) e vai add no mongo */
@@ -87,6 +87,19 @@ else{
         res.redirect('/admin')
     })
 }  
-})//#Final da  rota post
+})//#Final da  rota post //Rota de ADD
+
+
+
+/* Rota de EDIÇÃO */
+routes.get('/categorias/edit/:id', (req, res) => { //id: eh o parâmetro da categoria q será editado
+    Categoria.findOne({_id:req.params.id}).then((categoria) =>{ //xta efetuar uma procura na colletions
+        req.flash('success_msg', 'Categoria editada com sucesso!!')
+        res.render('admin/editcategorias', {categoria: categoria})
+    }).catch((err) =>{
+        req.flash('error_msg', 'Está categoria não existe')
+        res.redirect('/admin/categorias')
+    })
+})//#Final da  rota get //Rota de EDIÇÃO 
 
 module.exports = routes; //Exportar 'routes' p/ o 'app.js'

@@ -1,0 +1,20 @@
+{{!--Vamos chamar axtrutura "each" do handlebars p/ laeretar erros vindo da configuracao d validacao d formulario no ficheiro
+admin.js --}}
+{{#each erros}}{{!--Abrir--}} 
+<div class="alert alert-danger">{{texto}}</div> {{!--de cada erros no formulario vai exibir o valor q esta no "rexto", vindo do admin.js--}}
+{{else}}
+
+{{/each}} {{!--Fechar--}}
+
+<h2>Editar categorias</h2>
+<br>
+<div class="card-body">
+    <form action="/admin/categorias/nova" method="POST">
+    <input type="hidden" name="id" value="{{categoria._id}}">
+    <label for="nome">Nome: </label>
+    <input type="text" id="nome" name="nome" placeholder="Nome da categoria" class="form-control" value="{{categoria.nome}}">
+    <label for="slug">Slug</label>
+    <input type="text" id="slug" name="slug" value="{{categoria.slug}}" placeholder="Slug da categoria" class="form-control"><br>
+    <button class="btn btn-success">Editar categoria</button>
+</form>
+</div>

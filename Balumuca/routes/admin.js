@@ -111,7 +111,7 @@ routes.post('/categorias/edit', (req, res) => { //Eu próprio devo fzr o meu sis
 
         //salvar Edicao
         categoria.save().then(() =>{
-            req.flash('success_msg', 'Categodia editada com sucesso')
+            req.flash('success_msg', 'Categoria editada com sucesso')
             res.redirect("/admin/categorias")
         }).catch((err) => {
             req.flash('error_error', 'Houve erro interno ao salvar a editacao da categoria')
@@ -120,9 +120,21 @@ routes.post('/categorias/edit', (req, res) => { //Eu próprio devo fzr o meu sis
 
         
     }).catch((err) => {
-        res.flash('error_error', "Houve erro aí editar a categoria")
+        res.flash('error_msg', 'Houve erro aí editar a categoria')
         res.redirect("/admin/categorias")
     })
 })//#Edicao
+
+
+//          DELETAR
+routes.post('/categorias/deletar', (req, res) => {
+    Categoria.deleteOne({_id: req.body.id}).then(() => {
+        req.flash('success_msg', 'Categoria Deletada com sucesso')
+        res.redirect("/admin/categorias")
+    }).catch((err) => {
+        req.flash('error_msg', 'Houve erro aí Deletar a categoria')
+        res.redirect("/admin/categorias")
+    })
+})
 
 module.exports = routes; //Exportar 'routes' p/ o 'app.js'

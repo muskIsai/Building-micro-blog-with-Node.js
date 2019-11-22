@@ -102,4 +102,27 @@ routes.get('/categorias/edit/:id', (req, res) => { //id: eh o parâmetro da cate
     })
 })//#Final da  rota get //Rota de EDIÇÃO 
 
+
+routes.post('/categorias/edit', (req, res) => { //Eu próprio devo fzr o meu sistema de validação p/ Edição
+    Categoria.findOne({_id: req.body.id}).then((categoria) => {
+
+        categoria.nome = req.body.nome //Diz q o noenda categoria q queremos editar vai receber o novo elemento q xta ser digitado no campo nome
+        categoria.slug = req.body.slug //msm coisa q acontece no campo nome
+
+        //salvar Edicao
+        categoria.save().then(() =>{
+            req.flash('success_msg', 'Categodia editada com sucesso')
+            res.redirect("/admin/categorias")
+        }).catch((err) => {
+            req.flash('error_error', 'Houve erro interno ao salvar a editacao da categoria')
+            res.redirect("/admin/categorias")
+        })
+
+        
+    }).catch((err) => {
+        res.flash('error_error', "Houve erro aí editar a categoria")
+        res.redirect("/admin/categorias")
+    })
+})//#Edicao
+
 module.exports = routes; //Exportar 'routes' p/ o 'app.js'

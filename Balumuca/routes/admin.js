@@ -13,10 +13,6 @@ routes.get('/', (req, res)=> {
     res.render('admin/index')
 })
 
-//Posts
-routes.get('/posts', (req, res) => {
-        res.render('admin/posts')
-    }) 
 
 
 //Categorias
@@ -135,6 +131,24 @@ routes.post('/categorias/deletar', (req, res) => {
         req.flash('error_msg', 'Houve erro aí Deletar a categoria')
         res.redirect("/admin/categorias")
     })
+})
+
+
+                    /*Pagina d listagem d Postagem */
+routes.get('/postagens', (req, res) => {
+    res.render('admin/postagens')
+})
+
+
+/*Essa view vai renderizar a pagina d add d Postagens */
+routes.get('/postagens/add', (req, res) => {
+    Categoria.find().then((categorias) => {
+        res.render('admin/addpostagem', {categorias: categorias}) //vai passar tds "Categoria" q existem p/ views d postagens
+    }).catch((err) =>{
+        req.flash('error_msg', 'Houve erro ao carregar o formulario')
+        res.redirect('/admin')
+    })
+    
 })
 
 module.exports = routes; //Exportar 'routes' p/ o 'app.js'
